@@ -25,14 +25,31 @@ provider:
 functions:
   registerUser:
     handler: src/functions/registerUser.registerUser
-      events:
-        - http:
-            path: /users
-            method: post
-            cors: true
-            request:
-              schema:
-                application/json: ${file(src/schema/register_user.json)}
+    events:
+      - http:
+          path: /users
+          method: post
+          cors: true
+          request:
+            schema:
+              application/json: ${file(src/schema/register_user.json)}
+  signIn:
+    handler: src/functions/signIn.signIn
+    events:
+      - http:
+          path: /sign-in
+          method: post
+          cors: true
+          request:
+            schema:
+              application/json: ${file(src/schema/sign_in.json)}
+  getUsers:
+    handler: src/functions/getUsers.getUsers
+    events:
+      - http:
+          path: /users
+          method: get
+          cors: true
   getProducts:
     handler: src/functions/getProducts.getProducts
     events:

@@ -2,25 +2,21 @@ const AWS = require('aws-sdk');
 const db = new AWS.DynamoDB.DocumentClient();
 const uuid = require('uuid');
 
-export const buyProducts = async (event, context, callback) => {
+export const registerUser = async (event, context, callback) => {
 
     let body = JSON.parse(event.body);
-    console.log(body);
-    const { products, totalPrice } = body;
-    //body = sanitize(body);
-    const { email, cep, address } = body;
+    const { email, username, password, passwordConfirmation } = body;
 
     const post = {
         userId: uuid.v4(),
         email,
-        cep,
-        address,
-        totalPrice,
-        products
+        username,
+        password,
+        passwordConfirmation
     };
 
     return db.put({
-        TableName: 'userBuys',
+        TableName: 'users',
         Item: post
     }).promise().then(() => {
         callback(null, response(201, post));
