@@ -23,6 +23,16 @@ provider:
       Resource: "arn:aws:dynamodb:sa-east-1:*:*"
 
 functions:
+  registerUser:
+    handler: src/functions/registerUser.registerUser
+      events:
+        - http:
+            path: /users
+            method: post
+            cors: true
+            request:
+              schema:
+                application/json: ${file(src/schema/register_user.json)}
   getProducts:
     handler: src/functions/getProducts.getProducts
     events:
@@ -30,3 +40,13 @@ functions:
           path: /products
           method: get
           cors: true
+  buyProducts:
+    handler: src/functions/buyProducts.buyProducts
+    events:
+      - http:
+          path: /user/products
+          method: post
+          cors: true
+          request:
+            schema:
+              application/json: ${file(src/schema/post_products.json)}

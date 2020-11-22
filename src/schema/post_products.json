@@ -1,3 +1,36 @@
 {
-    "definitions": {}
+    "definitions": {},
+    "type": "object",
+    "required": [
+        "email",
+        "cep",
+        "address",
+        "products"
+    ],
+    "properties": {
+        "email": {
+            "type": "string",
+            "title": "email",
+            "minLength": 7,
+            "maxLength": 30
+        },
+        "cep": {
+            "type": "string",
+            "title": "cep",
+            "pattern": "^([0-9]{5})-[0-9]{3}"
+        },
+        "address": {
+            "type": "string",
+            "title": "address",
+            "minLength": 10,
+            "maxLength": 50
+        },
+        "totalPrice": {
+            "type": "number",
+            "title": "totalPrice"
+        },
+        "products": {
+            "type": "array"
+        }
+    }
 }

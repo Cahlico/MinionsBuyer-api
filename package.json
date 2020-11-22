@@ -18,6 +18,10 @@
     "serverless-offline": "^5.3.3"
   },
   "dependencies": {
-    "aws-sdk": "^2.796.0"
+    "aws-sdk": "^2.796.0",
+    "fix": "0.0.6",
+    "nodemailer": "^6.4.16",
+    "string-strip-html": "^6.3.0",
+    "uuid": "^8.3.1"
   }
 }
