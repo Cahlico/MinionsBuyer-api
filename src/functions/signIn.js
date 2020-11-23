@@ -13,7 +13,7 @@ export const signIn = async (event, context, callback) => {
         Key: { userId },
         TableName: 'users'
     }).promise().then(res => {
-        if(res.Item.email !== email || !(bcrypt.compareSync(password, res.Item.password))) return callback(null, response(401, { message: 'incorrect email or password' }));
+        if(res.Item.email !== email || !bcrypt.compareSync(password, res.Item.password)) return callback(null, response(401, { message: 'invalid email or password' }));
     }).catch(err => callback(null, response(err.statusCode, err)));
 
     const post = {

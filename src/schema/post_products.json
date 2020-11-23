@@ -6,6 +6,7 @@
         "email",
         "cep",
         "address",
+        "totalPrice",
         "products"
     ],
     "properties": {
