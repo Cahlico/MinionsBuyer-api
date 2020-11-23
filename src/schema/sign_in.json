@@ -3,7 +3,8 @@
     "type": "object",
     "required": [
         "email",
-        "password"
+        "password",
+        "userId"
     ],
     "properties": {
         "email": {
@@ -18,6 +19,11 @@
             "title": "password",
             "minLength": 5,
             "maxLength": 12
+        },
+        "userId": {
+            "type": "string",
+            "title": "userId",
+            "minLength": 8
         }
     }
 }

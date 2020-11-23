@@ -1,6 +1,7 @@
 const AWS = require('aws-sdk');
 const db = new AWS.DynamoDB.DocumentClient();
 const uuid = require('uuid');
+const bcrypt = require('bcryptjs');
 
 export const registerUser = async (event, context, callback) => {
 
@@ -11,8 +12,8 @@ export const registerUser = async (event, context, callback) => {
         userId: uuid.v4(),
         email,
         username,
-        password,
-        passwordConfirmation
+        password: bcrypt.hashSync(password, 10),
+        passwordConfirmation: bcrypt.hashSync(passwordConfirmation, 10)
     };
 
     return db.put({

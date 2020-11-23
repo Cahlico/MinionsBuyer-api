@@ -67,3 +67,22 @@ functions:
           request:
             schema:
               application/json: ${file(src/schema/post_products.json)}
+  getProductsByUser:
+    handler: src/functions/getProductsByUser.getProductsByUser
+    events:
+      - http:
+          path: /products/{id}
+          method: get
+          cors: true
+
+resources:
+  Resources:
+    GatewayResponseDefault4XX:
+      Type: 'AWS::ApiGateway::GatewayResponse'
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: DEFAULT_4XX
+        RestApiId:
+          Ref: 'ApiGatewayRestApi'

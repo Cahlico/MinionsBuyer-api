@@ -9,7 +9,7 @@ export const signIn = async (event, context, callback) => {
     const token = uuid.v4();
 
     const post = {
-        userId: userId,
+        userId,
         email,
         password,
         token
@@ -19,7 +19,7 @@ export const signIn = async (event, context, callback) => {
         TableName: 'session',
         Item: post
     }).promise().then(() => {
-        callback(null, response(201, { userId, email, token }));
+        callback(null, response(200, { userId, email, token }));
     }).catch(err => callback(null, response(err.statusCode, err)));
 };
 
@@ -29,6 +29,7 @@ function response(statusCode, message) {
         headers: {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Credentials': true,
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
         },
         body: JSON.stringify(message)
     };
