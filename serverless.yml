@@ -21,6 +21,7 @@ provider:
         - dynamodb:Scan
         - dynamodb:PutItem
         - dynamodb:GetItem
+        - dynamodb:DeleteItem
       Resource: "arn:aws:dynamodb:sa-east-1:*:*"
 
 functions:
@@ -74,6 +75,13 @@ functions:
       - http:
           path: /products/{id}
           method: get
+          cors: true
+  endSession:
+    handler: src/functions/endSession.endSession
+    events:
+      - http:
+          path: /sign-out/{id}
+          method: delete
           cors: true
 
 resources:
