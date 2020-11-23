@@ -5,8 +5,14 @@ export const getProductsByUser = async (event, context, callback) => {
 
     const userId = event.pathParameters.id;
 
+    const { Authorization } = event.headers;
+    if(!Authorization) return callback(null, response(401, 'missing authorization token'));
+
+    //const token = Authorization.split(' ')[1];
+
+
     const params = {
-        Key: { id: userId },
+        Key: { userId },
         TableName: 'userBuys'
     };
 

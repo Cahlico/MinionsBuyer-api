@@ -1,15 +1,18 @@
 const AWS = require('aws-sdk');
 const db = new AWS.DynamoDB.DocumentClient();
-const uuid = require('uuid');
 
 export const buyProducts = async (event, context, callback) => {
 
     let body = JSON.parse(event.body);
     const { products, totalPrice } = body;
-    const { email, cep, address } = body;
+    const { userId, email, cep, address } = body;
+    const { Authorization } = event.headers;
+    if(!Authorization) return callback(null, response(401, 'missing authorization token'));
+
+    //const token = Authorization.split(' ')[1];
 
     const post = {
-        userId: uuid.v4(),
+        userId,
         email,
         cep,
         address,

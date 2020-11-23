@@ -2,12 +2,17 @@
     "definitions": {},
     "type": "object",
     "required": [
+        "userId",
         "email",
         "cep",
         "address",
         "products"
     ],
     "properties": {
+        "userId": {
+            "type": "string",
+            "title": "properties"
+        },
         "email": {
             "type": "string",
             "title": "email",
