@@ -1,5 +1,6 @@
 const AWS = require('aws-sdk');
 const db = new AWS.DynamoDB.DocumentClient();
+//const nodemailer = require('nodemailer');
 
 export const buyProducts = async (event, context, callback) => {
 
@@ -9,7 +10,14 @@ export const buyProducts = async (event, context, callback) => {
     const { Authorization } = event.headers;
     if(!Authorization) return callback(null, response(401, 'missing authorization token'));
 
-    //const token = Authorization.split(' ')[1];
+    const token = Authorization.split(' ')[1];
+
+    db.get({
+        Key: { userId },
+        TableName: 'session'
+    }).promise().then(res => {
+        if(res.Item.token !== token) return callback(null, response(401, { message: 'invalid token' }));
+    }).catch(err => callback(null, response(err.statusCode, err)));
 
     const post = {
         userId,
@@ -38,3 +46,28 @@ function response(statusCode, message) {
         body: JSON.stringify(message)
     };
 }
+
+/*function sendEmail(post) {
+    const sender = nodemailer.createTransport({
+        host: 'smtp.ethereal.email',
+        port: 587,
+        secure: true,
+        auth: {
+            user: 'carlosaugusto1999@gmail.com',
+            pass: ''
+        }
+    });
+
+    const emailFormat = {
+        from: 'carlosaugusto1999@gmail.com',
+        to: 'carlosaugusto19991@poli.ufrj.br',
+        subject: 'Enviando Email com Node.js',
+        text: `compra na loja Minions Buyer no valor de ${post.totalPrice}`
+    };
+
+    sender.sendMail(emailFormat, (error) => {
+        if (error) {
+            console.log(error);
+        }
+    });
+}*/

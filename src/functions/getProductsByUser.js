@@ -8,8 +8,14 @@ export const getProductsByUser = async (event, context, callback) => {
     const { Authorization } = event.headers;
     if(!Authorization) return callback(null, response(401, 'missing authorization token'));
 
-    //const token = Authorization.split(' ')[1];
+    const token = Authorization.split(' ')[1];
 
+    db.get({
+        Key: { userId },
+        TableName: 'session'
+    }).promise().then(res => {
+        if(res.Item.token !== token) return callback(null, response(401, { message: 'invalid token' }));
+    }).catch(err => callback(null, response(err.statusCode, err)));
 
     const params = {
         Key: { userId },
