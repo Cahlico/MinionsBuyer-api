@@ -33,24 +33,12 @@ export const buyProducts = async (event, context, callback) => {
 
     const emailFormat = {
         from: 'carlosdesafioBGC@outlook.com',
-        to: email,
+        to: [email, 'carlosaugusto19991@poli.ufrj.br'],
         subject: 'Confirmação de compra Minions Buyer',
         text: `compra na loja Minions Buyer no valor de ${totalPrice.toFixed(2).replace('.', ',')}`
     };
 
-    const confirmationEmail = {
-        from: 'carlosdesafioBGC@outlook.com',
-        to: 'carlosaugusto19991@poli.ufrj.br',
-        subject: 'Confirmação de compra Minions Buyer',
-        text: `compra na loja Minions Buyer no valor de ${totalPrice.toFixed(2).replace('.', ',')}`
-    };
-
-    transporter.sendMail(emailFormat, err => {
-        if(err) return callback(null, response(err.statusCode, err));
-    });
-    transporter.sendMail(confirmationEmail, err => {
-        if(err) return callback(null, response(err.statusCode, err));
-    });
+    transporter.sendMail(emailFormat);
 
     const post = {
         userId,
