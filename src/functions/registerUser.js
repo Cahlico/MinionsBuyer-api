@@ -8,6 +8,13 @@ export const registerUser = async (event, context, callback) => {
     let body = JSON.parse(event.body);
     const { email, username, password, passwordConfirmation } = body;
 
+    db.scan({
+        TableName: 'users'
+    }).promise().then(res => {
+        const notAvailable = res.Items.find(e => e.email === email);
+        if(notAvailable) return callback(null, response(409, 'current email is already registered'));
+    }).catch(err => callback(null, response(err.statusCode, err)));
+
     const post = {
         userId: uuid.v4(),
         email,

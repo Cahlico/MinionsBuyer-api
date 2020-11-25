@@ -6,7 +6,7 @@ export const getProductsByUser = async (event, context, callback) => {
     const userId = event.pathParameters.id;
 
     const { Authorization } = event.headers;
-    if(!Authorization) return callback(null, response(401, 'missing authorization token'));
+    if(!Authorization) return callback(null, response(401, { message: 'missing authorization token' }));
 
     const token = Authorization.split(' ')[1];
 
@@ -25,7 +25,7 @@ export const getProductsByUser = async (event, context, callback) => {
     return db.get(params).promise()
         .then(res => {
             if(res.Item) callback(null, response(200, res.Item));
-            else callback(null, response(404, { error: 'no purchase from this account yet'}));
+            else callback(null, response(404, { error: 'no purchases from this account yet'}));
         })
         .catch(err => callback(null, response(err.statusCode, err)));
 };
@@ -40,3 +40,7 @@ function response(statusCode, message) {
         body: JSON.stringify(message)
     };
 }
+
+/*async function isAvailable() {
+
+}*/
