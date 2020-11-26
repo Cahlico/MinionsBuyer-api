@@ -19,11 +19,11 @@ Languages:<br>
 </p>
 
 The following tools and frameworks were used in the construction of the project:<br>
-  <img src="https://img.shields.io/badge/node.js%20-%2343853D.svg?&style=for-the-badge&logo=node.js&logoColor=white"/>
-  <img src="https://img.shields.io/badge/webpack%20-%238DD6F9.svg?&style=for-the-badge&logo=webpack&logoColor=black" />
-  <img src="https://miro.medium.com/max/877/1*BdKEE3815BcMklgX9jTjIw.png" />
-  <img src="https://miro.medium.com/max/13334/1*RJs-ufPYhfbJaugiKtoOZA.png" />
-  <img src="https://miro.medium.com/max/568/1*NVCQ4tTrPoAYDAkXCTFe8A.png" />
+  <img src="https://img.shields.io/badge/node.js%20-%2343853D.svg?&style=for-the-badge&logo=node.js&logoColor=white"/><br>
+  <img src="https://img.shields.io/badge/webpack%20-%238DD6F9.svg?&style=for-the-badge&logo=webpack&logoColor=black" /><br>
+  <img width="35" src="https://miro.medium.com/max/877/1*BdKEE3815BcMklgX9jTjIw.png" /><br>
+  <img width="35" src="https://miro.medium.com/max/13334/1*RJs-ufPYhfbJaugiKtoOZA.png" /><br>
+  <img width="35" src="https://miro.medium.com/max/568/1*NVCQ4tTrPoAYDAkXCTFe8A.png" /><br>
   
   ### Author
 ---
