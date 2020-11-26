@@ -19,7 +19,7 @@ export const signIn = async (event, context, callback) => {
     const post = {
         userId,
         email,
-        password,
+        password: bcrypt.hashSync(password, 10),
         token
     };
 

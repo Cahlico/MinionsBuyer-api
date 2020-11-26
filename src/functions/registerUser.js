@@ -15,19 +15,23 @@ export const registerUser = async (event, context, callback) => {
         if(notAvailable) return callback(null, response(409, 'current email is already registered'));
     }).catch(err => callback(null, response(err.statusCode, err)));
 
+    const userId = uuid.v4();
+
     const post = {
-        userId: uuid.v4(),
+        userId,
         email,
         username,
         password: bcrypt.hashSync(password, 10),
         passwordConfirmation: bcrypt.hashSync(passwordConfirmation, 10)
     };
 
+    const resp = { userId, email, username };
+
     return db.put({
         TableName: 'users',
         Item: post
     }).promise().then(() => {
-        callback(null, response(201, post));
+        callback(null, response(201, resp));
     }).catch(err => callback(null, response(err.statusCode, err)));
 };
 
